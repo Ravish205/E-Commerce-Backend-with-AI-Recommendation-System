@@ -227,7 +227,7 @@ pip install -r backend/requirements.txt
 Populate all 20 database tables with realistic electronic products, categories, sample customer orders, verified reviews, and coupons:
 ```bash
 source .venv/bin/activate
-PYTHONPATH=. python database/seed/seed_data.py
+python database/seed/seed_data.py
 ```
 *Expected output: `Database seeding completed successfully.`*
 
@@ -235,6 +235,7 @@ PYTHONPATH=. python database/seed/seed_data.py
 ```bash
 source .venv/bin/activate
 python backend/run.py
+# or simply: python run.py
 ```
 *Backend API will start at: `http://localhost:5000` (Healthcheck: `http://localhost:5000/api/health`)*
 
