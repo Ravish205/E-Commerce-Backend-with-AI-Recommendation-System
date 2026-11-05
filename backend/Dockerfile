@@ -20,3 +20,4 @@ COPY . /app/backend/
 EXPOSE 5000
 
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "3", "backend.app:create_app('production')"]
+

@@ -50,3 +50,4 @@ export const RecommendationSection: React.FC<RecommendationSectionProps> = ({
     </section>
   );
 };
+

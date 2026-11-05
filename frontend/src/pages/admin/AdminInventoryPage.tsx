@@ -159,3 +159,4 @@ export const AdminInventoryPage: React.FC = () => {
     </div>
   );
 };
+
