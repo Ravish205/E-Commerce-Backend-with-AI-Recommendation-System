@@ -47,7 +47,17 @@ def create_app(config_name: str = "development") -> Flask:
     app.register_blueprint(admin_bp)
     app.register_blueprint(recommendation_bp)
 
-    # Healthcheck endpoint
+    # Root & Healthcheck endpoints
+    @app.route("/", methods=["GET"])
+    def root_status():
+        return jsonify({
+            "status": "online",
+            "message": "ApexStore E-Commerce & AI Recommendation REST API",
+            "frontend_url": "http://localhost:5173",
+            "health_check": "/api/health",
+            "version": "1.0.0",
+        }), 200
+
     @app.route("/api/health", methods=["GET"])
     def health_check():
         return jsonify({

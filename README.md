@@ -211,44 +211,50 @@ You can run the application either using **Local Development Mode** or via **Doc
 
 ---
 
-### Method A: Local Development Setup (Quickest)
+### Quick Start (Single Command - Recommended)
 
-#### 1. Setup Backend Environment
+Run the included startup script, which automatically launches the Flask backend on port 5000 and the React Vite frontend on port 5173 concurrently:
+
 ```bash
-# From project root
-python3 -m venv .venv
-source .venv/bin/activate
-
-# Install backend dependencies
-pip install -r backend/requirements.txt
+bash start.sh
 ```
 
-#### 2. Seed the Database
-Populate all 20 database tables with realistic electronic products, categories, sample customer orders, verified reviews, and coupons:
+- **Storefront**: [http://localhost:5173](http://localhost:5173)
+- **Admin Dashboard**: [http://localhost:5173/admin/dashboard](http://localhost:5173/admin/dashboard)
+- **REST API**: [http://localhost:5000](http://localhost:5000)
+- *(Press `Ctrl+C` to cleanly stop both services).*
+
+---
+
+### Method A: Running in Two Terminals
+
+If you prefer running services in separate terminal windows:
+
+#### Terminal 1: Backend Server (Port 5000)
 ```bash
+# 1. Activate virtual environment
 source .venv/bin/activate
+
+# 2. Seed database (first run only)
 python database/seed/seed_data.py
-```
-*Expected output: `Database seeding completed successfully.`*
 
-#### 3. Run Backend Server
-```bash
-source .venv/bin/activate
-python backend/run.py
-# or simply: python run.py
+# 3. Start Flask API server (KEEP THIS TERMINAL RUNNING)
+python run.py
 ```
-*Backend API will start at: `http://localhost:5000` (Healthcheck: `http://localhost:5000/api/health`)*
+*Leave Terminal 1 running.*
 
-#### 4. Setup and Run Frontend
+#### Terminal 2: React Frontend (Port 5173)
 Open a new terminal window:
 ```bash
+# Ensure Node is in PATH
+export PATH="$PWD/.node/bin:$PATH"
+
+# Start Vite dev server
 cd frontend
-npm install
 npm run dev
 ```
-*Frontend will start at: `http://localhost:5173`*
 
-Open `http://localhost:5173` in your browser. All API requests are automatically proxied to `:5000`.
+> **Note**: Both the backend (Terminal 1) and frontend (Terminal 2) must remain running concurrently. If you stop the backend, Vite's reverse proxy will report `ECONNREFUSED 127.0.0.1:5000`.
 
 ---
 
